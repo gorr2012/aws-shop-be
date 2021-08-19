@@ -187,7 +187,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1629357756699-2021-08-19T07:22:36.699Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1629369573758-2021-08-19T10:39:33.758Z/product-service.zip"
               },
               "Handler": "src/functions/getProductById/getProductById.main",
               "Runtime": "nodejs14.x",
@@ -217,7 +217,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/product-service/dev/1629357756699-2021-08-19T07:22:36.699Z/product-service.zip"
+                "S3Key": "serverless/product-service/dev/1629369573758-2021-08-19T10:39:33.758Z/product-service.zip"
               },
               "Handler": "src/functions/getProductsList/getProductsList.main",
               "Runtime": "nodejs14.x",
@@ -240,24 +240,24 @@
               "GetProductsListLogGroup"
             ]
           },
-          "GetProductByIdLambdaVersionyvj0M8KAtpz6NFzlhAktIJDPnVbwvqMSWQqCQnZ2IoE": {
+          "GetProductByIdLambdaVersionWLokueQX36qttMwzR97ez31EcNN225XvKaz94t1HHT0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductByIdLambdaFunction"
               },
-              "CodeSha256": "ULNo9grdtKJ3oVu2uHxG8m50AYQKSCVfkfgGoRo0rqc="
+              "CodeSha256": "zSwNnANZeu+jIKz3INt9g6Io2mfMuEW8NtTSBmz5+b4="
             }
           },
-          "GetProductsListLambdaVersionSVkaxIrUi4xAoL9US97gIXzX6v3hTnq6VUR0EzWmto": {
+          "GetProductsListLambdaVersionzUWaPOnoBlDMGKkXq1ljCMrs6aQ2qETOrNfRvjpFjQU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductsListLambdaFunction"
               },
-              "CodeSha256": "ULNo9grdtKJ3oVu2uHxG8m50AYQKSCVfkfgGoRo0rqc="
+              "CodeSha256": "zSwNnANZeu+jIKz3INt9g6Io2mfMuEW8NtTSBmz5+b4="
             }
           },
           "ApiGatewayRestApi": {
@@ -273,7 +273,7 @@
               "MinimumCompressionSize": 1024
             }
           },
-          "ApiGatewayResourceGetproductbyid": {
+          "ApiGatewayResourceProducts": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
@@ -282,17 +282,17 @@
                   "RootResourceId"
                 ]
               },
-              "PathPart": "getProductById",
+              "PathPart": "products",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayResourceGetproductbyidProductidVar": {
+          "ApiGatewayResourceProductsProductidVar": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
               "ParentId": {
-                "Ref": "ApiGatewayResourceGetproductbyid"
+                "Ref": "ApiGatewayResourceProducts"
               },
               "PathPart": "{productId}",
               "RestApiId": {
@@ -300,22 +300,7 @@
               }
             }
           },
-          "ApiGatewayResourceGetproductslist": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "PathPart": "getProductsList",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayMethodGetproductbyidProductidVarOptions": {
+          "ApiGatewayMethodProductsProductidVarOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -353,14 +338,14 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGetproductbyidProductidVar"
+                "Ref": "ApiGatewayResourceProductsProductidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodGetproductslistOptions": {
+          "ApiGatewayMethodProductsOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -398,20 +383,20 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGetproductslist"
+                "Ref": "ApiGatewayResourceProducts"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
             }
           },
-          "ApiGatewayMethodGetproductbyidProductidVarGet": {
+          "ApiGatewayMethodProductsProductidVarGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGetproductbyidProductidVar"
+                "Ref": "ApiGatewayResourceProductsProductidVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -451,13 +436,13 @@
               "GetProductByIdLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodGetproductslistGet": {
+          "ApiGatewayMethodProductsGet": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "GET",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceGetproductslist"
+                "Ref": "ApiGatewayResourceProducts"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -497,7 +482,7 @@
               "GetProductsListLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1629357736083": {
+          "ApiGatewayDeployment1629369561335": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -506,10 +491,10 @@
               "StageName": "dev"
             },
             "DependsOn": [
-              "ApiGatewayMethodGetproductbyidProductidVarOptions",
-              "ApiGatewayMethodGetproductslistOptions",
-              "ApiGatewayMethodGetproductbyidProductidVarGet",
-              "ApiGatewayMethodGetproductslistGet"
+              "ApiGatewayMethodProductsProductidVarOptions",
+              "ApiGatewayMethodProductsOptions",
+              "ApiGatewayMethodProductsProductidVarGet",
+              "ApiGatewayMethodProductsGet"
             ]
           },
           "GetProductByIdLambdaPermissionApiGateway": {
@@ -599,7 +584,7 @@
           "GetProductByIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductByIdLambdaVersionyvj0M8KAtpz6NFzlhAktIJDPnVbwvqMSWQqCQnZ2IoE"
+              "Ref": "GetProductByIdLambdaVersionWLokueQX36qttMwzR97ez31EcNN225XvKaz94t1HHT0"
             },
             "Export": {
               "Name": "sls-product-service-dev-GetProductByIdLambdaFunctionQualifiedArn"
@@ -608,7 +593,7 @@
           "GetProductsListLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductsListLambdaVersionSVkaxIrUi4xAoL9US97gIXzX6v3hTnq6VUR0EzWmto"
+              "Ref": "GetProductsListLambdaVersionzUWaPOnoBlDMGKkXq1ljCMrs6aQ2qETOrNfRvjpFjQU"
             },
             "Export": {
               "Name": "sls-product-service-dev-GetProductsListLambdaFunctionQualifiedArn"
@@ -743,7 +728,7 @@
           {
             "http": {
               "method": "get",
-              "path": "getProductById/{productId}",
+              "path": "products/{productId}",
               "cors": {
                 "origins": [
                   "*"
@@ -775,7 +760,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductByIdLambdaVersionyvj0M8KAtpz6NFzlhAktIJDPnVbwvqMSWQqCQnZ2IoE"
+        "versionLogicalId": "GetProductByIdLambdaVersionWLokueQX36qttMwzR97ez31EcNN225XvKaz94t1HHT0"
       },
       "getProductsList": {
         "handler": "src/functions/getProductsList/getProductsList.main",
@@ -783,7 +768,7 @@
           {
             "http": {
               "method": "get",
-              "path": "getProductsList",
+              "path": "products",
               "cors": {
                 "origins": [
                   "*"
@@ -815,7 +800,7 @@
         "timeout": 6,
         "runtime": "nodejs14.x",
         "vpc": {},
-        "versionLogicalId": "GetProductsListLambdaVersionSVkaxIrUi4xAoL9US97gIXzX6v3hTnq6VUR0EzWmto"
+        "versionLogicalId": "GetProductsListLambdaVersionzUWaPOnoBlDMGKkXq1ljCMrs6aQ2qETOrNfRvjpFjQU"
       }
     },
     "configValidationMode": "warn",
@@ -842,7 +827,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/product-service/dev/1629357756699-2021-08-19T07:22:36.699Z",
+    "artifactDirectoryName": "serverless/product-service/dev/1629369573758-2021-08-19T10:39:33.758Z",
     "artifact": ""
   }
 }

@@ -6,8 +6,8 @@ import { middyfy } from '@libs/lambda';
 
 const data: ValidatedEventAPIGatewayProxyEvent<string> = async () => {
   return formatJSONResponse({
-    products,
-  });
+    products
+  }, 200);
 }
 
 export const main = middyfy(data);
@@ -72,7 +72,7 @@ const products = [
   {
     "count": 3,
     "description": "Short Product Description7",
-    "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+    "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a2",
     "price": 15,
     "title": "The best product"
   }
