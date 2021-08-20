@@ -70,7 +70,7 @@ const products = [
   }
 ]
 
-const getProductById: ValidatedEventAPIGatewayProxyEvent<string> = async (event) => {
+export const getProductById: ValidatedEventAPIGatewayProxyEvent<string> = async (event) => {
   const productById = products.find(e => e.id === event.pathParameters.productId);
   
   if (!productById) {
