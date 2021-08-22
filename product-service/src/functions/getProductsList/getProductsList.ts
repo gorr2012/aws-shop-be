@@ -6,7 +6,7 @@ import { middyfy } from '@libs/lambda';
 
 export const getProductsList: ValidatedEventAPIGatewayProxyEvent<string> = async () => {
   return formatJSONResponse({
-    products
+    products: products
   }, 200);
 }
 
@@ -16,63 +16,63 @@ const products = [
   {
     "count": 4,
     "description": "Short Product Description1",
-    "id": "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
+    "id": "1a",
     "price": 2.4,
     "title": "ProductOne"
   },
   {
     "count": 6,
     "description": "Short Product Description3",
-    "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a0",
+    "id": "2a",
     "price": 10,
     "title": "ProductNew"
   },
   {
     "count": 7,
     "description": "Short Product Description2",
-    "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a2",
+    "id": "3a",
     "price": 23,
     "title": "ProductTop"
   },
   {
     "count": 12,
     "description": "Short Product Description7",
-    "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a1",
+    "id": "4a",
     "price": 15,
     "title": "ProductTitle"
   },
   {
     "count": 7,
     "description": "Short Product Description2",
-    "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a3",
+    "id": "5a",
     "price": 23,
     "title": "Product"
   },
   {
     "count": 8,
     "description": "Short Product Description4",
-    "id": "7567ec4b-b10c-48c5-9345-fc73348a80a1",
+    "id": "6a",
     "price": 15,
     "title": "ProductTest"
   },
   {
     "count": 2,
     "description": "Short Product Descriptio1",
-    "id": "7567ec4b-b10c-48c5-9445-fc73c48a80a2",
+    "id": "7a",
     "price": 23,
     "title": "Product2"
   },
   {
     "count": 3,
     "description": "Short Product Description7",
-    "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+    "id": "8a",
     "price": 15,
     "title": "ProductName"
   },
   {
     "count": 3,
     "description": "Short Product Description7",
-    "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a2",
+    "id": "9a",
     "price": 15,
     "title": "The best product"
   }

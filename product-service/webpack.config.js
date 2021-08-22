@@ -48,11 +48,7 @@ module.exports = {
         ],
         options: {
           transpileOnly: true,
-          experimentalWatchApi: true,
-          presets: [
-            ['@babel/preset-env', {targets: {node: 'current'}}],
-            '@babel/preset-typescript',
-          ]
+          experimentalWatchApi: true
         },
       },
     ],
