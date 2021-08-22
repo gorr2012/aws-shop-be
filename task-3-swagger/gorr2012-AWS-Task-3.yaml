@@ -1,15 +1,13 @@
 ---
 swagger: "2.0"
 info:
-  description: This is a simple API
+  description: API describe 2 lambdas
   version: 1.0.0
-  title: Simple Inventory API
-  contact:
-    email: you@your-company.com
+  title: Description API Task-3
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: hre1jg2q5j.execute-api.eu-west-1.amazonaws.com
+host: zexkamtixl.execute-api.eu-west-1.amazonaws.com
 basePath: /dev/
 tags:
 - name: product-service
@@ -36,7 +34,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Products'
-  /getProductById/{productId}:
+  /products/{productId}:
     get:
       tags:
       - product-service
