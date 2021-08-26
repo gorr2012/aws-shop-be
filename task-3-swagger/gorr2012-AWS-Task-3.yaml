@@ -1,66 +1,64 @@
----
-swagger: "2.0"
+swagger: '2.0'
 info:
   description: API describe 2 lambdas
   version: 1.0.0
   title: Description API Task-3
+
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-host: zexkamtixl.execute-api.eu-west-1.amazonaws.com
-basePath: /dev/
+
+# tags are used for organizing operations
 tags:
 - name: product-service
   description: REST API for shop
-schemes:
-- https
+
 paths:
   /products:
     get:
       tags:
       - product-service
       summary: show all products
+      operationId: searchInventory
       description: |
         By passing in the appropriate options, you can search for
         available inventory in the system
-      operationId: searchInventory
       produces:
       - application/json
-      parameters: []
       responses:
-        "200":
+        200:
           description: find all products
           schema:
             type: array
             items:
-              $ref: '#/definitions/Products'
+              $ref: '#/definitions/Product'
   /products/{productId}:
     get:
       tags:
       - product-service
       summary: find product by Id
-      description: Adds an item to the system
       operationId: addInventory
+      description: Adds an item to the system
       consumes:
       - application/json
       produces:
       - application/json
       parameters:
-      - name: productId
-        in: path
+      - in: path
+        name: productId
         required: true
         type: string
       responses:
-        "200":
+        200:
           description: find one product
           schema:
             type: array
             items:
-              $ref: '#/definitions/ProductById'
-        "404":
+              $ref: '#/definitions/Product'
+        404:
           description: invalid input, Id invalid
 definitions:
-  Products:
+  Product:
     type: object
     properties:
       id:
@@ -74,36 +72,14 @@ definitions:
       description:
         type: string
     example:
-    - id: d290f1ee-6c54-4b01-90e6-d701748f0851
+      id: 2a
       title: Widget Adapter
       count: 1
       price: 1.2
       description: Short Product Description1
-    - id: d290f1ee-6c54-4b01-90e6-d701748f0851
-      title: Widget Adapter
-      count: 1
-      price: 1.2
-      description: Short Product Description1
-    - id: d290f1ee-6c54-4b01-90e6-d701748f0851
-      title: Widget Adapter
-      count: 1
-      price: 1.2
-      description: Short Product Description1
-  ProductById:
-    properties:
-      id:
-        type: string
-      title:
-        type: string
-      count:
-        type: integer
-      price:
-        type: integer
-      description:
-        type: string
-    example:
-      id: d290f1ee-6c54-4b01-90e6-d701748f0851
-      title: Widget Adapter
-      count: 1
-      price: 1.2
-      description: Short Product Description1
+# Added by API Auto Mocking Plugin
+basePath: /dev/
+schemes:
+ - https
+# Added by API Auto Mocking Plugin
+host: zexkamtixl.execute-api.eu-west-1.amazonaws.com
