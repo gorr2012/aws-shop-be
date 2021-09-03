@@ -1,18 +1,18 @@
 import 'source-map-support/register';
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
-import { productsList } from '../productsList';
-import { OneProduct } from 'src/types/types';
+import { getProducts } from '@services/getProducts';
+import { logger } from '@libs/createLogger';
+import { APIGatewayProxyEvent } from 'aws-lambda';
 
-export const getData = async (productsList: OneProduct[]): Promise<OneProduct[] | null> =>
-await Promise.resolve(productsList);
-
-export const getProductsList = async () => {
-  const productsArray = await getData(productsList);
-  
-  return productsArray ?
-  formatJSONResponse({ products: productsArray }, 200) :
-  formatJSONResponse({ message: 'Server Error'}, 500);
+export const getProductsList = async (event: APIGatewayProxyEvent) => {
+  logger.info({ event }, 'Products to show');
+  try {
+    const products = await getProducts();
+    return formatJSONResponse({ products: products }, 200);
+  } catch (error) {
+    return formatJSONResponse({ message: `Server Error ${error}` }, 500);
+  }
 }
 
 export const main = middyfy(getProductsList);

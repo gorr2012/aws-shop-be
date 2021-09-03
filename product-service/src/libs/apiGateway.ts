@@ -28,6 +28,13 @@ export const apiResponses = {
       body: JSON.stringify({ message: `Response ${reqiest.message}` }),
     };
   },
+  _400: (reqiest: IRequest, status: number): IResponse => {
+    return {
+      statusCode: status,
+      headers,
+      body: JSON.stringify({ message: reqiest.message }),
+    };
+  },
 };
 
 export const formatJSONResponse = (response: Record<string, unknown>, status: number) => {
