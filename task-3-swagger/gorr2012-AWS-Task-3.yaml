@@ -68,7 +68,7 @@ definitions:
       count:
         type: integer
       price:
-        type: integer
+        type: number
       description:
         type: string
     example:
