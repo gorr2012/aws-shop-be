@@ -12,7 +12,7 @@ export const getProductById = async (event: APIGatewayProxyEvent) => {
     const productById = await getProduct(id);
     return formatJSONResponse({ products: productById }, 200);
   } catch (error) {
-    return formatJSONResponse({ message: 'Server Error' }, 500);
+    return formatJSONResponse({ message: `Server Error ${error}` }, 500);
   }
 }
 

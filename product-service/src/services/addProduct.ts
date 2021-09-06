@@ -11,9 +11,11 @@ export const addProduct = async (data: PostProduct): Promise<OneProduct[]> => {
     
     try {
         await client.connect();
+        await client.query('BEGIN')
         const { rows: products } = await client.query(textForProduct, valuesOfProduct);
         const valueOfStock = [products[0].id, count];
         const { rows: result } = await client.query(textForStock, valueOfStock);
+        await client.query('COMMIT')
         return result;
     } catch (error) {
         throw new Error('something went wrong');

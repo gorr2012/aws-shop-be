@@ -11,7 +11,7 @@ export const validateData = (event: APIGatewayProxyEvent) => {
         count: count
     }
     if (!title || typeof title !== 'string') {
-        return { value, error: '"string" is invalid' };
+        return { value, error: '"title" is invalid' };
     }
     if (!description || typeof description !== 'string') {
         return { value, error: '"description" is invalid' };
@@ -19,7 +19,7 @@ export const validateData = (event: APIGatewayProxyEvent) => {
     if (price === null || price === undefined || typeof price !== 'number') {
         return { value, error: '"price" is invalid' };
     }
-    if (count === null || count === undefined || typeof count !== 'number') {
+    if (count === null || count === undefined || typeof count !== 'number' || count < 1) {
         return { value, error: '"count" is invalid' };
     }
     return { value }
