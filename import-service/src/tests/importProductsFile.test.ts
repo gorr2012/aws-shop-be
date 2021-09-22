@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk-mock';
 import { APIGatewayProxyEvent } from 'aws-lambda';
-import { importProductsFile } from './handler';
+import { importProductsFile } from '../functions/import/handler';
 
 const s3getSignedUrlMock = jest
   .fn()

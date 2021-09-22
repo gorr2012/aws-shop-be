@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1632338166581" clover="3.2.0">
-  <project timestamp="1632338166581" name="All files">
+<coverage generated="1632339158430" clover="3.2.0">
+  <project timestamp="1632339158430" name="All files">
     <metrics statements="52" coveredstatements="52" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3" elements="59" coveredelements="59" complexity="0" loc="52" ncloc="52" packages="2" files="3" classes="3"/>
     <package name="functions.import">
       <metrics statements="28" coveredstatements="28" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
