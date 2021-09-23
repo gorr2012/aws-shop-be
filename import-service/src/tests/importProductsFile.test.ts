@@ -2,10 +2,6 @@ import AWS from 'aws-sdk-mock';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { importProductsFile } from '../functions/import/handler';
 
-const s3getSignedUrlMock = jest
-  .fn()
-  .mockImplementation((_action, _params, callback) => callback(null, 'signed_url'));
-
 const eventMock: APIGatewayProxyEvent = {
   queryStringParameters: {
     name: 'name',
@@ -14,7 +10,7 @@ const eventMock: APIGatewayProxyEvent = {
 
 describe('Tests for importProductsFile', () => {
   beforeEach(() => {
-    AWS.mock('S3', 'getSignedUrl', s3getSignedUrlMock);
+    AWS.mock('S3', 'getSignedUrl', 'signed_url');
   });
 
   test('Should return correct signedUrl in body', async () => {
