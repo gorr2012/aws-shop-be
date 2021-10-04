@@ -74,3 +74,6 @@ export const productsListFullMock = [
         "title": "The best product"
     }
 ]
+
+export const sqsEventproductsListFullMock = { event: { Records: productsListFullMock }}
+export const sqsEventoneProdMock = { event: { Records: JSON.stringify(oneProd) }}

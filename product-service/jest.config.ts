@@ -83,7 +83,9 @@ export default {
   
     // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
     moduleNameMapper: {
-      "^@libs/(.*)$": "<rootDir>/src/libs/$1"
+      "^@libs/(.*)$": "<rootDir>/src/libs/$1",
+      "^@functions/(.*)$": "<rootDir>/src/functions/$1",
+      "^@services/(.*)$": "<rootDir>/src/services/$1"
     },
   
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
