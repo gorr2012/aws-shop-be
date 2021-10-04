@@ -75,5 +75,20 @@ export const productsListFullMock = [
     }
 ]
 
-export const sqsEventproductsListFullMock = { event: { Records: productsListFullMock }}
-export const sqsEventoneProdMock = { event: { Records: JSON.stringify(oneProd) }}
+export const sqsEventproductsListFullMock = {
+    Records: [
+      {
+        body: '{"title":"The best product","description":"Short Product Description7","price":"1","count":"2"}',
+      },
+      {
+        body: '{"title":"The best product","description":"Short Product Description7","price":"1","count":"2"}',
+      }
+    ],
+  } as any;
+export const sqsEventoneProdMock = {
+    Records: [
+      {
+        body: '{"title":"The best product","description":"Short Product Description7","price":"1","count":"2"}',
+      },
+    ],
+  } as any;

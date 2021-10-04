@@ -26,11 +26,9 @@ export const catalogBatchProcess = async (event) => {
     }
   };
 
-  event.Records.forEach(async ({ body }) => {
+  event.Records.forEach(async ({ body }) => {    
     await postProduct({ body: body.replace(/\ufeff/gi, '') });
     const messageParams = getMessageParams(body);
     await sns.publish(messageParams).promise();
   });
 }
-
-// export const main = middyfy(catalogBatchProcess);
