@@ -23,11 +23,19 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
+      SQS_URL: '${cf:product-service-dev.QueueExpRef}'
     },
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: ['sqs:*'],
+        Resource: '${cf:product-service-dev.QueueExpArn}',
+      },
+    ],
     lambdaHashingVersion: '20201221',
   },
-  // import the function via paths
-  functions: { importFileParser, importProductsFile },
+// import the function via paths
+functions: { importFileParser, importProductsFile },
 };
 
 module.exports = serverlessConfiguration;

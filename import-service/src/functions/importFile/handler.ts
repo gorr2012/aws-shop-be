@@ -1,7 +1,7 @@
 import 'source-map-support/register';
 import { formatJSONResponse } from '@libs/apiGateway';
 import { middyfy } from '@libs/lambda';
-import { S3 } from 'aws-sdk';
+import { S3, SQS } from 'aws-sdk';
 import { S3Event } from 'aws-lambda';
 import * as csv from 'csv-parser';
 import { BUCKET, IResponse } from 'src/types/types';
@@ -9,9 +9,8 @@ import { BUCKET, IResponse } from 'src/types/types';
 
 const importFileParser = async (event: S3Event): Promise<IResponse> => {
   const s3 = new S3({ region: 'eu-west-1' });
-
+  const sqs = new SQS();
   try {
-    const results = [];
 
     for (const record of event.Records) {
       const fileName = record.s3.object.key;
@@ -27,18 +26,31 @@ const importFileParser = async (event: S3Event): Promise<IResponse> => {
           .createReadStream()
           .pipe(csv({
             separator: ';',
-            headers: ['Title', 'Description', 'Price', 'Count', 'Action']
+            row: true
           }))
-          .on('data', (data) => results.push(data))
+          .on('data', async (data) => {
+            await new Promise<void>((resolve) => {
+              sqs.sendMessage({
+                QueueUrl: process.env.SQS_URL,
+                MessageBody: JSON.stringify(data).replace(/^\uFEFF/, '')
+              }, (err) => {
+                if (err) {
+                  console.log('была ошибка ', err);
+                }
+                console.log('send message for ', JSON.stringify(data).replace(/\ufeff/gi, ''));
+                resolve();
+              });
+            })
+          })
           .on('end', () => {
-            console.log(results);
+            console.log('end parser');
             resolve();
           });
       });
       await s3.copyObject(newFileOptions).promise()
       await s3.deleteObject(fileOptions).promise()
     }
-    return formatJSONResponse(200, results);
+    return formatJSONResponse(200, 'success');
   } catch (err) {
     return formatJSONResponse(500, err?.message);
   }
