@@ -44,7 +44,7 @@ const serverlessConfiguration: AWS = {
         Action: ['sqs:*'],
         Resource: [
           {
-            'Fn::GetAtt': ['MySQS', 'Arn'],
+            'Fn::GetAtt': ['catalogItemsQueue', 'Arn'],
           },
         ],
       },
@@ -53,10 +53,10 @@ const serverlessConfiguration: AWS = {
   },
   resources: {
     Resources: {
-      MySQS: {
+      catalogItemsQueue: {
         Type: 'AWS::SQS::Queue',
         Properties: {
-          QueueName: 'product-service-MySQS'
+          QueueName: 'product-service-catalogItemsQueue'
         }
       },
       SNSTopic: {
@@ -68,7 +68,7 @@ const serverlessConfiguration: AWS = {
       SNSSubscription: {
         Type: 'AWS::SNS::Subscription',
         Properties: {
-          Endpoint: 'maxnovbel@mail.ru',
+          Endpoint: 'test@mail.ru',
           Protocol: 'email',
           TopicArn: {
             Ref: 'SNSTopic'
@@ -78,7 +78,7 @@ const serverlessConfiguration: AWS = {
       SNSSubscriptionFilteredBydescription: {
         Type: 'AWS::SNS::Subscription',
         Properties: {
-          Endpoint: 'sergey_gornost@mail.ru',
+          Endpoint: 'test1@mail.ru',
           Protocol: 'email',
           TopicArn: {
             Ref: 'SNSTopic'
@@ -93,7 +93,7 @@ const serverlessConfiguration: AWS = {
       QueueExpRef: {
         Description: 'Export ref SQS',
         Value: {
-          Ref: 'MySQS',
+          Ref: 'catalogItemsQueue',
         },
         Export: {
           Name: {
@@ -104,7 +104,7 @@ const serverlessConfiguration: AWS = {
       QueueExpArn: {
         Description: 'Export ref SQS',
         Value: {
-          "Fn::GetAtt": ["MySQS", "Arn"]
+          "Fn::GetAtt": ["catalogItemsQueue", "Arn"]
         },
         Export: {
           Name: {
