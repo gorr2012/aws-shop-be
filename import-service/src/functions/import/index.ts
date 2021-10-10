@@ -12,9 +12,16 @@ export default {
         request: {
           parameters: {
             querystrings: {
-              name: true
+              name: true,
             }
           }
+        },
+        authorizer: {
+          name: 'basicAuthorizer',
+          arn: '${cf:authorization-service-dev.AuthArn}',
+          resultTtlInSeconds: 0,
+          identitySource: 'method.request.header.Authorization',
+          type: 'token'
         }
       }
     }

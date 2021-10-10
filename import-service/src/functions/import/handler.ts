@@ -21,8 +21,6 @@ export const importProductsFile = async (event: APIGatewayProxyEvent): Promise<I
   } catch (err) {
     return formatJSONResponse(500, err?.message);
   }
-
-
 }
 
 export const main = middyfy(importProductsFile);
