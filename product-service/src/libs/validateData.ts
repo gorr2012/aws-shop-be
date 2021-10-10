@@ -1,14 +1,14 @@
-import { APIGatewayProxyEvent } from 'aws-lambda';
 import { logger } from '@libs/createLogger';
 
-export const validateData = (event: APIGatewayProxyEvent) => {
-    logger.info({ event }, 'event');
-    const { title, description, price, count } = JSON.parse(event.body);
+export const validateData = (body) => {
+    logger.info({ body }, 'product');
+    const product = JSON.parse(body);
+    const { title, description, price, count } = product;
     const value = {
         title: title,
         description: description,
-        price: price,
-        count: count
+        price: +price,
+        count: +count
     }
     if (!title || typeof title !== 'string') {
         return { value, error: '"title" is invalid' };
@@ -16,10 +16,10 @@ export const validateData = (event: APIGatewayProxyEvent) => {
     if (!description || typeof description !== 'string') {
         return { value, error: '"description" is invalid' };
     }
-    if (price === null || price === undefined || typeof price !== 'number') {
+    if (value.price === null || value.price === undefined || typeof value.price !== 'number') {
         return { value, error: '"price" is invalid' };
     }
-    if (count === null || count === undefined || typeof count !== 'number' || count < 1) {
+    if (value.count === null || value.count === undefined || typeof value.count !== 'number' || value.count < 1) {
         return { value, error: '"count" is invalid' };
     }
     return { value }

@@ -1,14 +1,14 @@
 import 'source-map-support/register';
 import { middyfy } from '@libs/lambda';
 import { formatJSONResponse } from '@libs/apiGateway';
-import { APIGatewayProxyEvent } from 'aws-lambda';
+// import { APIGatewayProxyEvent } from 'aws-lambda';
 import { logger } from '@libs/createLogger';
 import { validateData } from '@libs/validateData';
 import { addProduct } from '@services/addProduct';
 
-export const postProduct = async (event: APIGatewayProxyEvent) => {
-    logger.info({ event }, 'event');
-    const { error, value } = validateData(event);
+export const postProduct = async ({ body }) => {
+    logger.info(body, 'body');
+    const { error, value } = validateData(body);
     if(error) {
         return formatJSONResponse({ message: `invalid data ${error}` }, 400)
     }
