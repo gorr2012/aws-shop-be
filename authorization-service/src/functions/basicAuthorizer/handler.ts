@@ -1,18 +1,19 @@
+import { APIGatewayAuthorizerCallback, APIGatewayTokenAuthorizerEvent } from 'aws-lambda';
 import 'source-map-support/register';
 
-export const basicAuthorizer = async (event, _context, callback) => {
-  console.log(event);
-
+export const basicAuthorizer = async (
+  event: APIGatewayTokenAuthorizerEvent,
+  _context, callback: APIGatewayAuthorizerCallback
+  ) => {
   if (event['type'] !== 'TOKEN') callback('Unauthorized');
-
-  const authToken = event.authorizationToken;
-  const encodedCreds = authToken.split(' ')[1];
-  const buff = Buffer.from(encodedCreds, 'base64');
-  const plainCredsv = buff.toString('utf-8').split(':');
-  const [ userName, userPass ] = plainCredsv;
-
   try {
-    userPass && userPass && callback('Unauthorized');
+    const authToken = event.authorizationToken;
+    const encodedCreds = authToken.split(' ')[1];
+    const buff = Buffer.from(encodedCreds, 'base64');
+    const plainCredsv = buff.toString('utf-8').split(':');
+    const [userName, userPass] = plainCredsv;
+
+    if (!userPass || !userPass) callback('Unauthorized');
 
     const storedUserPass = process.env[userName];
     const effect = !storedUserPass || storedUserPass !== userPass ? 'Deny' : 'Allow';
@@ -23,8 +24,8 @@ export const basicAuthorizer = async (event, _context, callback) => {
   }
 }
 
-const generatePolicy = (principalId: string, resource: string, effect = 'Allow') => {  
-  return {
+const generatePolicy = (principalId: string, resource: string, effect = 'Allow') =>
+  ({
     principalId: principalId,
     policyDocument: {
       Version: '2012-10-17',
@@ -36,5 +37,4 @@ const generatePolicy = (principalId: string, resource: string, effect = 'Allow')
         }
       ]
     }
-  }
-}
+  })
