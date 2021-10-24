@@ -26,9 +26,10 @@ export const catalogBatchProcess = async (event) => {
     }
   };
 
-  event.Records.forEach(async ({ body }) => {    
+  for(let record of event.Records ) {
+    const { body } = record;
     await postProduct({ body: body.replace(/\ufeff/gi, '') });
     const messageParams = getMessageParams(body);
     await sns.publish(messageParams).promise();
-  });
+  }
 }
